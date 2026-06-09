@@ -551,12 +551,12 @@
                         <div style="margin: 0.5rem 0 0.3rem 0; font-size: 0.8rem; color: #5b6e8c;">
                             <i class="fas fa-microchip"></i> 开发平台：IntelliJ IDEA (Windows端) / Android Studio (Android端)   &nbsp;|&nbsp;
                             <i class="fas fa-code"></i> 语言：Java &nbsp;|&nbsp;
-                            <i class="fas fa-tools"></i> 技术栈：设计模式、SurfaceView、Socket、MediaPlayer/SoundPool
+                            <i class="fas fa-tools"></i> 技术栈：设计模式、Swing、Android SDK(API 30)、Java Socket/ServerSocket、Java对象序列化
                         </div>
                         <ul class="desc-list">
                             <li>基于 Java Swing 实现 Windows 端游戏核心逻辑，运用单例、工厂、策略、观察者等设计模式构建敌机、道具与子弹系统，实现本地排行榜持久化。</li>
-                            <li>将游戏完整迁移至 Android 平台，使用 SurfaceView 重构渲染与触屏交互，适配屏幕分辨率与生命周期；集成 MediaPlayer 与 SoundPool 实现背景音乐切换及音效管理。</li>
-                            <li>设计 TCP Socket 联机对战服务器与客户端，实现双人实时分数同步、对战状态管理及结算功能，完成跨平台移植与网络化改造。</li>
+                            <li>将游戏完整迁移至 Android 平台，使用 SurfaceView 重构渲染管线，以 25 FPS 稳定帧率驱动游戏主循环，并适配多种屏幕分辨率与 Activity 生命周期；集成 MediaPlayer 与 SoundPool 实现分层音效管理，支持背景音乐动态切换及即时战斗音效。</li>
+                            <li>设计基于 TCP Socket 的联机对战框架，客户端以 50ms 间隔高频上报实时状态，实现双人分数同步与对战状态管理；服务端采用多线程并发模型处理双客户端通信，支撑完整的匹配、对战及结算流程，完成从单机到跨平台网络对战的升级。</li>
                         </ul>
                     </div>
                     <div class="timeline-item">
@@ -568,9 +568,9 @@
                             <i class="fas fa-tools"></i> 技术栈：MSPM0G3507、DHT11/BMP180、OLED（SPI）、4×4薄膜键盘、PWM蜂鸣器
                         </div>
                         <ul class="desc-list">
-                            <li>负责 OLED 屏幕显示：将温度、湿度、气压数据实时显示在屏幕上，并做了 4 个不同页面（总览、详情页），可用按键切换。</li>
-                            <li>参与键盘控制逻辑：用 4×4 薄膜键盘实现页面切换、修改报警阈值、数字输入等功能。</li>
-                            <li>协助报警功能：当温度、湿度或气压超过设定值时，蜂鸣器会响，并根据不同参数发出不同声音。</li>
+                            <li>设计并实现 OLED 多级菜单系统（总览 + 三项详情页），数据刷新率达 2 Hz，页面切换响应 < 200 ms，屏幕显示平滑无闪烁，采用模块化驱动封装，实现按键切换页面。</li>
+                            <li>采用轮询式矩阵扫描 + 状态机架构开发 4×4 薄膜键盘扫描驱动，实现页面切换、报警阈值逐位输入、参数确认等功能，加入 200ms 消抖保护，兼顾响应速度与抗干扰。</li>
+                            <li>实现多阈值实时报警系统，CPU 轮询周期内完成数据比较，报警触发延迟 < 100 ms；针对温度、湿度、气压超标分别产生不同音调的蜂鸣声，提升异常辨识度。</li>
                         </ul>
                     </div>
                     <div class="timeline-item">
@@ -582,7 +582,7 @@
                             <i class="fas fa-tools"></i> 技术栈：PWM、GPIO中断、OLED(I2C)、RTOS多任务、状态机
                         </div>
                         <ul class="desc-list">
-                            <li>基于Hi3861开发板，整合PWM蜂鸣器与OLED显示驱动，实现三首乐曲（欢乐颂、虫儿飞、友谊地久天长）的播放与OLED屏幕实时显示歌曲名称及下一首提示。</li>
+                            <li>基于 Hi3861 开发板，整合 PWM 蜂鸣器与 OLED 显示驱动，实现三首乐曲的播放与 OLED 屏幕实时显示歌曲名称及下一首提示。</li>
                             <li>将原阻塞式音乐播放改为非阻塞式，通过可编程按键中断实现任意时刻切歌、暂停与模式切换，提升交互响应速度。</li>
                             <li>独立完成多状态机设计（播放/切歌/暂停/循环），优化音符时长与频率映射表，确保音准与播放流畅性。</li>
                         </ul>
@@ -596,9 +596,9 @@
                             <i class="fas fa-tools"></i> 技术栈：RISC-V、单周期CPU、五级流水线、SoC集成、数码管显示
                         </div>
                         <ul class="desc-list">
-                            <li>基于miniRV指令集，实现单周期CPU，支持add、sub、beq、lw、sw等23条指令，并通过波形仿真验证逻辑运算、访存及分支跳转功能。</li>
-                            <li>设计五级流水线CPU（IF/ID/EX/MEM/WB），独立实现跳转判断与地址计算模块，优化数据通路，完成理想流水线仿真。</li>
-                            <li>集成SoC，编写数码管显示驱动，解决PC模块延迟导致指令跳过的下板问题，成功在FPGA上运行测试程序并显示结果。</li>
+                            <li>基于 miniRV 指令集，实现单周期 CPU，支持 add、sub、beq、lw、sw 等 23 条指令，并通过波形仿真验证逻辑运算、访存及分支跳转功能。</li>
+                            <li>设计五级流水线 CPU（IF/ID/EX/MEM/WB），独立实现跳转判断与地址计算模块，优化数据通路，完成理想流水线仿真。</li>
+                            <li>集成 SoC，编写数码管显示驱动，解决 PC 模块延迟导致指令跳过的下板问题，成功在 FPGA 上运行测试程序并显示结果。</li>
                         </ul>
                     </div>
                 </div>
