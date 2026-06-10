@@ -560,6 +560,21 @@
                         </ul>
                     </div>
                     <div class="timeline-item">
+                        <h3>🔧 类C语言编译器设计与实现</h3>
+                        <div class="date-badge">2026.04 – 2026.05</div>
+                        <div style="margin: 0.5rem 0 0.3rem 0; font-size: 0.8rem; color: #5b6e8c;">
+                            <i class="fas fa-microchip"></i> 开发平台：IntelliJ IDEA &nbsp;|&nbsp;
+                            <i class="fas fa-code"></i> 语言：Java &nbsp;|&nbsp;
+                            <i class="fas fa-tools"></i> 技术栈：LR(1) 语法分析、DFA 词法分析、语法制导翻译、RISC-V
+                        </div>
+                        <ul class="desc-list">
+                            <li>基于 DFA 实现词法分析器，逐字符扫描源程序，支持关键字、标识符、常量、运算符的识别，按最长匹配原则生成 Token 流。</li>
+                            <li>实现 LR(1) 语法分析驱动程序，采用状态栈与符号栈双栈架构，驱动 Shift/Reduce/Accept 流程，支持声明、赋值及完整算术表达式的归约。</li>
+                            <li>利用观察者模式将语义分析与 IR 生成从语法驱动中解耦，在归约时同步维护语义栈完成类型推导与三地址码生成，经模拟器验证正确性。</li>
+                            <li>设计基于变量生命周期分析的寄存器分配算法，引入寄存器抢占策略优先回收已死亡变量，将 11 条 IR 生成为 13 条 RISC-V 汇编指令，完成完整编译流水线。</li>
+                        </ul>
+                    </div>
+                    <div class="timeline-item">
                         <h3>🌡️ 环境监测仪设计与开发</h3>
                         <div class="date-badge">2025.10 – 2025.11</div>
                         <div style="margin: 0.5rem 0 0.3rem 0; font-size: 0.8rem; color: #5b6e8c;">
@@ -579,7 +594,7 @@
                         <div style="margin: 0.5rem 0 0.3rem 0; font-size: 0.8rem; color: #5b6e8c;">
                             <i class="fas fa-microchip"></i> 开发平台：Visual Studio Code / Hi3861 &nbsp;|&nbsp;
                             <i class="fas fa-code"></i> 语言：C &nbsp;|&nbsp;
-                            <i class="fas fa-tools"></i> 技术栈：PWM、GPIO中断、OLED(I2C)、RTOS多任务、状态机
+                            <i class="fas fa-tools"></i> 技术栈：PWM、GPIO中断、OLED(I2C)、状态机
                         </div>
                         <ul class="desc-list">
                             <li>基于 Hi3861 开发板，整合 PWM 蜂鸣器与 OLED 显示驱动，实现三首乐曲的播放与 OLED 屏幕实时显示歌曲名称及下一首提示。</li>
